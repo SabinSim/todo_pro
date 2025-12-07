@@ -1,2 +1,4 @@
 Flask
 gunicorn
+alembic
+psycopg2-binary
