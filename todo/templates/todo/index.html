@@ -1,0 +1,82 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+            <div>
+                <h2 class="fw-bold mb-0">📋 나의 할 일</h2>
+                <p class="text-muted small mb-0">오늘도 힘차게 목표를 달성해보세요!</p>
+            </div>
+            <a href="/todos/new" class="btn btn-primary rounded-pill px-4 shadow-sm">
+                + 새 할 일
+            </a>
+        </div>
+
+        {% if todos %}
+            <div class="row">
+                {% for t in todos %}
+                <div class="col-12 mb-3">
+                    <div class="card card-custom card-hover {% if t.done %}todo-done{% endif %}">
+                        <div class="card-body d-flex justify-content-between align-items-center p-4">
+                            
+                            <div class="flex-grow-1 pe-3" onclick="location.href='/todos/toggle/{{ t.id }}'" style="cursor: pointer;">
+                                <div class="d-flex align-items-center mb-2">
+                                    {% if t.priority == 1 %}
+                                        <span class="badge bg-danger me-2 rounded-pill">긴급</span>
+                                    {% elif t.priority == 2 %}
+                                        <span class="badge bg-warning text-dark me-2 rounded-pill">보통</span>
+                                    {% else %}
+                                        <span class="badge bg-secondary me-2 rounded-pill">낮음</span>
+                                    {% endif %}
+                                    
+                                    {% if t.category %}
+                                        <span class="badge bg-info bg-opacity-10 text-info me-2 rounded-pill">{{ t.category }}</span>
+                                    {% endif %}
+                                </div>
+
+                                <h5 class="card-title mb-1 fw-bold">
+                                    {{ t.title }}
+                                </h5>
+                                <p class="card-text small text-muted mb-0">
+                                    📅 마감: {{ t.deadline or '설정 안함' }}
+                                </p>
+                            </div>
+
+                            <div class="d-flex flex-column flex-sm-row gap-2">
+                                <a href="/todos/toggle/{{ t.id }}" 
+                                   class="btn btn-sm {% if t.done %}btn-secondary{% else %}btn-outline-success{% endif %} rounded-circle d-flex align-items-center justify-content-center" 
+                                   style="width: 38px; height: 38px;"
+                                   title="{% if t.done %}완료 취소{% else %}완료하기{% endif %}">
+                                    {% if t.done %}↩️{% else %}✅{% endif %}
+                                </a>
+                                
+                                <a href="/todos/edit/{{ t.id }}" class="btn btn-sm btn-outline-secondary rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px;" title="수정">
+                                    ✏️
+                                </a>
+                                
+                                <a href="/todos/delete/{{ t.id }}" 
+                                   class="btn btn-sm btn-outline-danger rounded-circle d-flex align-items-center justify-content-center"
+                                   style="width: 38px; height: 38px;"
+                                   title="삭제"
+                                   onclick="return confirm('정말로 삭제하시겠습니까? 복구할 수 없습니다.');">
+                                   🗑️
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5 card card-custom">
+                <div class="mb-3" style="font-size: 4rem;">📝</div>
+                <h3 class="text-muted fw-bold">아직 등록된 할 일이 없습니다.</h3>
+                <p class="text-secondary mb-4">머릿속에 있는 계획을 지금 바로 기록해보세요!</p>
+                <a href="/todos/new" class="btn btn-primary rounded-pill px-4">첫 할 일 만들기</a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

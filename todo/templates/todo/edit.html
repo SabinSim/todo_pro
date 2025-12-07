@@ -1,0 +1,47 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card card-custom p-4">
+            <div class="card-body">
+                <h3 class="fw-bold mb-4" style="color: var(--brand-primary);">할 일 수정</h3>
+                
+                <form method="POST" action="/todos/update/{{ todo.id }}">
+                    <div class="mb-4">
+                        <label class="form-label fw-bold">제목 <span class="text-danger">*</span></label>
+                        <input name="title" class="form-control form-control-lg bg-light border-0" value="{{ todo.title }}" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-muted small">상세 설명</label>
+                        <textarea name="description" class="form-control bg-light border-0" rows="3">{{ todo.description }}</textarea>
+                    </div>
+                    
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <label class="form-label fw-bold text-muted small">카테고리</label>
+                            <input name="category" class="form-control bg-light border-0" value="{{ todo.category }}">
+                        </div>
+                        <div class="col-md-4 mb-3 mb-md-0">
+                            <label class="form-label fw-bold text-muted small">우선순위</label>
+                            <select name="priority" class="form-select bg-light border-0">
+                                <option value="1" {% if todo.priority == 1 %}selected{% endif %}>🔥 긴급</option>
+                                <option value="2" {% if todo.priority == 2 %}selected{% endif %}>📋 보통</option>
+                                <option value="3" {% if todo.priority == 3 %}selected{% endif %}>😌 낮음</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label fw-bold text-muted small">마감일</label>
+                            <input type="date" name="deadline" class="form-control bg-light border-0" value="{{ todo.deadline }}">
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 pt-3 border-top">
+                        <button class="btn btn-primary btn-lg flex-grow-1 rounded-pill fw-bold">수정 완료</button>
+                        <a href="/todos" class="btn btn-outline-secondary btn-lg rounded-pill px-4">취소</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

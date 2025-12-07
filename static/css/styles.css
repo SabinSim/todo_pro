@@ -1,0 +1,81 @@
+/* 1. 브랜드 컬러 및 변수 정의 */
+:root {
+    --brand-primary: #4a37a6; /* 메인 인디고 퍼플 */
+    --brand-secondary: #6c757d;
+    --bg-light-gray: #f8f9fa;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 부드러운 그림자 */
+    --card-radius: 12px; /* 둥근 모서리 */
+}
+
+body {
+    background-color: var(--bg-light-gray) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; /* Footer를 바닥으로 밀어내기 위함 */
+}
+
+/* 2. 네비게이션 바 커스텀 */
+.navbar-custom {
+    background-color: var(--brand-primary) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* 3. 통일된 카드 디자인 (핵심) */
+.card-custom {
+    border: none;
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+    background-color: white;
+    transition: transform 0.2s ease-in-out;
+}
+
+/* 할 일 목록 등에서 마우스 올렸을 때 살짝 떠오르는 효과 */
+.card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* 4. 완료된 할 일 스타일 */
+.todo-done {
+    background-color: #f0f2f5; /* 더 연한 회색 */
+    opacity: 0.7;
+}
+.todo-done .card-title {
+    text-decoration: line-through;
+    color: #adb5bd;
+}
+
+/* 5. 브랜드 버튼 오버라이드 */
+.btn-primary {
+    background-color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+.btn-primary:hover {
+    background-color: #3b2c85; /* 약간 더 진한 색 */
+    border-color: #3b2c85;
+}
+.btn-outline-primary {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+.btn-outline-primary:hover {
+    background-color: var(--brand-primary);
+    color: white;
+}
+
+/* Footer 스타일 */
+.footer-custom {
+    background-color: white;
+    border-top: 1px solid #eaeaea;
+    color: #888;
+}

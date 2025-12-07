@@ -1,0 +1,6 @@
+__pycache__/
+todo_pro.db
+*.pyc
+.DS_Store
+venv/
+env/

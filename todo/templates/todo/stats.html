@@ -1,0 +1,58 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-10">
+        <h2 class="fw-bold mb-4 pb-2 border-bottom">📊 나의 활동 통계</h2>
+
+        <div class="row text-center mb-5 g-3">
+            <div class="col-md-4">
+                <div class="card card-custom h-100 border-0" style="background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white;">
+                    <div class="card-body p-4">
+                        <h6 class="text-uppercase opacity-75 mb-2">전체 할 일</h6>
+                        <h1 class="display-4 fw-bold mb-0">{{ stats.total }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-custom h-100 border-0" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white;">
+                     <div class="card-body p-4">
+                        <h6 class="text-uppercase opacity-75 mb-2">완료함</h6>
+                        <h1 class="display-4 fw-bold mb-0">{{ stats.done_count }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                 <div class="card card-custom h-100 border-0" style="background: linear-gradient(135deg, #ff9966 0%, #ff5e62 100%); color: white;">
+                    <div class="card-body p-4">
+                        <h6 class="text-uppercase opacity-75 mb-2">진행 중</h6>
+                        <h1 class="display-4 fw-bold mb-0">{{ stats.pending_count }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-custom p-4">
+            <h4 class="fw-bold mb-4" style="color: var(--brand-primary);">📂 카테고리별 현황</h4>
+            {% if stats.categories %}
+                <ul class="list-group list-group-flush">
+                    {% for cat in stats.categories %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center bg-transparent py-3 px-0 border-bottom">
+                        <span class="fw-bold">{{ cat.category }}</span>
+                        <span class="badge bg-primary bg-opacity-10 text-primary rounded-pill px-3 py-2">{{ cat.count }}개</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                 <div class="text-center py-4 text-muted">
+                    <p class="mb-0">아직 카테고리 데이터가 없습니다.</p>
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="mt-4 text-center">
+            <a href="/todos" class="btn btn-outline-secondary rounded-pill px-4">← 목록으로 돌아가기</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
